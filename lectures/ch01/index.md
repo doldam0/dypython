@@ -547,3 +547,149 @@ pd.merge(df1, df2, how="left")
 ```python
 pd.merge(df1, df2, how="right")
 ```
+
+---
+
+# 데이터프레임 병합
+
+![height:900px](figs/joins.webp)
+
+---
+
+# NaN
+
+- **NaN**: **N**ot **a** **N**umber
+- 데이터가 없음을 나타내는 값
+- `isnull()`: NaN인지 여부를 나타내는 참/거짓 값 반환
+- `notnull()`: NaN이 아닌지 여부를 나타내는 참/거짓 값 반환
+- `dropna()`: NaN이 있는 행을 제거
+- `fillna()`: NaN을 특정 값으로 대체
+
+---
+
+# NaN
+
+<!-- _class: table-code two-cols -->
+
+| name  | price | color |
+| ----- | ----- | ----- |
+| False | False | False |
+| False | False | False |
+| False | False | False |
+| False | False | False |
+| False | False | True  |
+| False | True  | False |
+
+```python
+df.isnull()
+```
+
+---
+
+# NaN
+
+<!-- _class: table-code two-cols -->
+
+| name | price | color |
+| ---- | ----- | ----- |
+| True | True  | True  |
+| True | True  | True  |
+| True | True  | True  |
+| True | True  | True  |
+| True | True  | False |
+| True | False | True  |
+
+```python
+df.notnull()
+```
+
+---
+
+# NaN
+
+<!-- _class: table-code two-cols -->
+
+| name   | price | color  |
+| ------ | ----- | ------ |
+| apple  | 1000  | red    |
+| banana | 2000  | yellow |
+| carrot | 3000  | orange |
+| durian | 4000  | green  |
+
+```python
+df.dropna()
+```
+
+---
+
+# NaN
+
+<!-- _class: table-code two-cols -->
+
+| name     | price | color  |
+| -------- | ----- | ------ |
+| apple    | 1000  | red    |
+| banana   | 2000  | yellow |
+| carrot   | 3000  | orange |
+| durian   | 4000  | green  |
+| eggplant | 5000  | 0      |
+| fig      | 0     | purple |
+
+```python
+df.fillna(0)
+```
+
+---
+
+# 데이터프레임 요약
+
+- `head()`: 데이터프레임의 앞부분을 선택
+- `tail()`: 데이터프레임의 뒷부분을 선택
+- `info()`: 데이터프레임의 정보를 요약
+
+---
+
+# 데이터프레임 요약
+
+<!-- _class: table-code two-cols -->
+
+| name   | price | color  |
+| ------ | ----- | ------ |
+| apple  | 1000  | red    |
+| banana | 2000  | yellow |
+| carrot | 3000  | orange |
+
+```python
+df.head(3)
+```
+
+---
+
+# 데이터프레임 요약
+
+<!-- _class: table-code two-cols -->
+
+| name     | price | color  |
+| -------- | ----- | ------ |
+| durian   | 4000  | green  |
+| eggplant | 5000  | purple |
+| fig      | 6000  | brown  |
+
+```python
+df.tail(3)
+```
+
+---
+
+# 데이터프레임 요약
+
+<!-- _class: table-code two-cols -->
+
+| #   | Column | Non-Null Count | Dtype  |
+| --- | ------ | -------------- | ------ |
+| 0   | name   | 6 non-null     | object |
+| 1   | price  | 6 non-null     | int64  |
+
+```python
+df.info()
+```
