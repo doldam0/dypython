@@ -3,8 +3,8 @@
  * @theme mine
  *
  * @auto-scaling true
- * @size 4:3 960px 720px
- * @size 16:9 1280px 720px
+ * @size 4:3 1920px 1440px 
+ * @size 16:9 2560px 1440px
  */
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,900|IBM+Plex+Sans:400,700");
@@ -252,11 +252,11 @@ table td {
 }
 
 section {
-  font-size: 35px;
+  font-size: 70px;
   font-family: "IBM Plex Sans", "Noto Sans KR";
   line-height: 1.35;
-  letter-spacing: 1.25px;
-  padding: 70px;
+  letter-spacing: 1px;
+  padding: 140px;
   color: var(--foreground);
   background-color: var(--background);
 }

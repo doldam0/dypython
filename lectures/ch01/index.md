@@ -4,6 +4,7 @@ title: 데이터 과학을 위한 파이썬 프로그래밍
 footer: 성균관대학교 융합소프트웨어대학
 theme: mine
 paginate: true
+size: 16:9
 ---
 
 <!-- _class: title -->
@@ -36,7 +37,7 @@ paginate: true
 
 # 주피터 노트북 & 코랩 사용하기
 
-![height:470px](figs/colab.png)
+![height:900px](figs/colab.png)
 
 ---
 
