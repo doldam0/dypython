@@ -298,13 +298,26 @@ section table th,
 section table td {
   border-color: var(--code-current-line);
 }
-section table thead th {
-  background: var(--table-header-background);
-  color: var(--table-header-foreground);
+section table tbody > tr:nth-child(odd) td,
+section table tbody > tr:nth-child(odd) th {
+  background: var(--background);
 }
 section table tbody > tr:nth-child(even) td,
 section table tbody > tr:nth-child(even) th {
   background: var(--table-secondary-background);
+}
+section.table-two-heads table tbody > tr:nth-child(even) td,
+section.table-two-heads table tbody > tr:nth-child(even) th {
+  background: var(--background);
+}
+section.table-two-heads table tbody > tr:nth-child(odd) td,
+section.table-two-headds table tbody > tr:nth-child(odd) th {
+  background: var(--table-secondary-background);
+}
+section table thead th,
+section.table-two-heads table tbody > tr:first-child td {
+  background: var(--table-header-background);
+  color: var(--table-header-foreground);
 }
 section.table-code table {
   font-family: "Nanum Gothic Coding";
