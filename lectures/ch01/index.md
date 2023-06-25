@@ -444,10 +444,10 @@ df.loc[df["price"] > 3000, "price"] = 3000
 # 데이터 필터링 (값 대체)
 
 - `df[df["price"] > 3000]["price"] = 3000`은 안되나요?
-  - df[]가 복사본을 반환하기 때문
-- df[] vs df.loc[]
-  - df[]: 수정 불가능, 복사본 반환
-  - df.loc[]: 수정 가능, 원본 반환
+  - `df[][]`가 복사본을 반환하기 때문
+- `df[][]` vs `df.loc[,]`
+  - `df[][]`: 수정 불가능, 복사본 반환
+  - `df.loc[,]`: 수정 가능, 원본 반환
 
 ---
 
@@ -693,3 +693,20 @@ df.tail(3)
 ```python
 df.info()
 ```
+
+---
+
+# 엑셀 데이터 읽어오고 저장하기
+
+- `pd.read_excel()`: 엑셀 파일을 읽어 데이터프레임으로 변환
+- `df.to_excel()`: 데이터프레임을 엑셀 파일로 저장
+
+```python
+df = pd.read_excel("data.xlsx")
+df["price"] = df["price"] * 2
+df.to_excel("data.xlsx")
+```
+
+---
+
+# 실습: 엑셀 데이터 읽어와서 처리하기
