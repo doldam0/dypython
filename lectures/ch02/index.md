@@ -41,6 +41,34 @@ math: katex
 
 # 간단한 통계 수치
 
+<!-- _class: compact -->
+
+$$
+\begin{aligned}
+\sigma_X^2 &= \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)^2 \\
+&= \frac{1}{n} \sum_{i=1}^n (X_i^2 - 2X_i\bar X + \bar X^2) \\
+&= \frac{1}{n} \sum_{i=1}^n X_i^2 - \frac{2}{n} \sum_{i=1}^n X_i\bar X + \frac{1}{n} \sum_{i=1}^n \bar X^2 \\
+&= \frac{1}{n} \sum_{i=1}^n X_i^2 - 2 \bar X \frac{1}{n} \sum_{i=1}^n X_i + \bar X^2 \\
+\end{aligned}
+$$
+
+---
+
+# 간단한 통계 수치
+
+$$
+\begin{aligned}
+\sigma_X^2 
+&= \frac{1}{n} \sum_{i=1}^n X_i^2 - {2} \bar X^2 + \bar X^2 \\
+&= \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar X^2 \\
+&= \mathbb E[X^2] - \mathbb E[X]^2 \\
+\end{aligned}
+$$
+
+---
+
+# 간단한 통계 수치
+
 - `mean()`: 평균
 - `median()`: 중앙값
 - `min()`: 최소값
@@ -67,6 +95,8 @@ df = pd.DataFrame({
 ---
 
 # 간단한 통계 수치
+
+<!-- _class: table-code -->
 
 | name     | price | size |
 | -------- | ----- | ---- |
@@ -125,6 +155,16 @@ $$Z = \frac{X - X_{min}}{X_{max} - X_{min}}$$
 
 # 데이터 정규화
 
+* $0 \ge Z \ge 1$ 증명
+
+$X_{min} \le X \le X_{max}$이므로 $0 \le X - X_{min} \le X_{max} - X_{min}$
+$$\therefore 0 \le \frac{X - X_{min}}{X_{max} - X_{min}} \le 1$$
+
+
+---
+
+# 데이터 정규화
+
 ```python
 df["price"].apply(
     lambda x: (x - df["price"].min()) / (df["price"].max() - df["price"].min())
@@ -135,6 +175,8 @@ df
 ---
 
 # 데이터 정규화
+
+<!-- _class: table-code -->
 
 | name     | price | size |
 | -------- | ----- | ---- |
@@ -175,8 +217,57 @@ df
 
 # 복잡한 통계 수치
 
+$$
+\begin{aligned}
+
+\sigma_{XY} &= \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)(Y_i - \bar Y) \\
+
+&= \frac{1}{n} \sum_{i=1}^n (X_iY_i - X_i\bar{Y} - \bar{X}Y_i + \bar{X}\bar{Y}) \\
+
+&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \frac{1}{n} \sum_{i=1}^n X_i\bar{Y} - \frac{1}{n} \sum_{i=1}^n \bar{X}Y_i + \frac{1}{n} \sum_{i=1}^n \bar{X}\bar{Y} \\
+
+\end{aligned}
+$$
+
+---
+
+# 복잡한 통계 수치
+
+$$
+\begin{aligned}
+
+\sigma_{XY}
+&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \bar{Y}\frac{1}{n} \sum_{i=1}^n X_i - \bar{X}\frac{1}{n} \sum_{i=1}^n Y_i + \bar{X}\bar{Y} \\
+
+
+&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \bar{Y}\bar{X} - \bar{X}\bar{Y} + \bar{X}\bar{Y} \\
+
+&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \bar{X}\bar{Y} \\
+
+&= \mathbb E[XY] - \mathbb E[X]\mathbb E[Y] \\
+
+\end{aligned}
+$$
+
+---
+
+# 복잡한 통계 수치
+
+* 공분산의 통계적 의미
+
+  $$\sigma_{XY} = \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)(Y_i - \bar Y)$$
+
+  - $X_i$가 평균보다 클 때 $Y_i$도 평균보다 크면 $\sigma_{XY}$의 값 증가 (양의 상관관계)
+  - $X_i$가 평균보다 클 때 $Y_i$가 평균보다 작거나, $X_i$가 평균보다 작을 때 $Y_i$가 평균보다 크면 $\sigma_{XY}$의 값 감소 (음의 상관관계)
+  - $X_i$와 $Y_i$ 값에 규칙성이 없으면 $\sigma_{XY}$은 값이 0에 가까워짐 (상관관계 없음)
+
+---
+
+# 복잡한 통계 수치
+
 - **상관계수**: 두 변수가 얼마나 관련이 있는지를 나타내는 값
   - $r_{XY} = \frac{\sigma_{XY}}{\sigma_X \sigma_Y}$
+  - 공분산의 크기를 $-1$과 $1$ 사이의 값으로 정규화한 값
   - $-1 \le r_{XY} \le 1$
   - $r_{XY} = 1$이면 완전한 양의 상관관계
   - $r_{XY} = -1$이면 완전한 음의 상관관계
@@ -225,6 +316,64 @@ df
 ---
 
 # 데이터 표준화
+
+$$
+\begin{aligned}
+\bar{Z} = \mathbb E[Z] &= \mathbb E\left[\frac{X - \bar X}{\sigma_X}\right] \\
+&= \frac{1}{\sigma_X} \mathbb E[X - \bar X] \\
+&= \frac{1}{\sigma_X} \mathbb E[X] - \frac{1}{\sigma_X} \mathbb E[\bar X] \\
+&= 0 \quad (\because \mathbb E[\bar{X}] = \mathbb E[X]) \\
+\end{aligned}
+$$
+
+---
+
+# 데이터 표준화
+
+$$
+\begin{aligned}
+\mathbb E[Z^2]
+&= \mathbb E\left[\left(\frac{X - \bar X}{\sigma_X}\right)^2\right] \\
+&= \frac{1}{\sigma_X^2} \mathbb E[(X - \bar X)^2] \\
+&= \frac{1}{\sigma_X^2} \mathbb E[X^2 - 2X\bar X + \bar X^2] \\
+&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X\bar X] + \frac{1}{\sigma_X^2} \mathbb E[\bar X^2] \\
+\end{aligned}
+$$
+
+---
+
+# 데이터 표준화
+
+$$
+\begin{aligned}
+\mathbb E[Z^2]
+&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X]\mathbb E[\bar X] + \frac{1}{\sigma_X^2} \mathbb E[\bar X^2] \\
+&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X]^2 + \frac{1}{\sigma_X^2} \mathbb E[\bar X^2] \\
+&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X]^2 + \frac{1}{\sigma_X^2} \mathbb E[X]^2 \\
+&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{1}{\sigma_X^2} \mathbb E[X]^2 \\
+\end{aligned}
+$$
+
+---
+
+# 데이터 표준화
+
+$$
+\begin{aligned}
+\mathbb E[Z^2]
+&= \frac{1}{\sigma_X^2} (\mathbb E[X^2] - \mathbb E[X]^2) \\
+&= \frac{1}{\sigma_X^2} \sigma_X^2 \\
+&= 1 \\
+\end{aligned}
+$$
+
+$$\therefore \sigma_Z = \sqrt{\mathbb E[Z^2] - \mathbb E[Z]^2} = \sqrt{1 - 0} = 1$$
+
+---
+
+# 데이터 표준화
+
+<!-- _class: table-code -->
 
 | name     | price      | size |
 | -------- | ---------- | ---- |
