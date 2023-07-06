@@ -603,20 +603,15 @@ df.info()
 
 # 엑셀 데이터 읽어오고 저장하기
 
+- 깃헙 레포지토리에서 데이터 다운로드
 - `pd.read_excel()`: 엑셀 파일을 읽어 데이터프레임으로 변환
 - `df.to_excel()`: 데이터프레임을 엑셀 파일로 저장
 
 ```python
-df = pd.read_excel("data.xlsx")
-df["price"] = df["price"] * 2
-df.to_excel("data.xlsx")
+df = pd.read_excel("inventors.xlsx")
+df["age"] = df["age"] + 1
+df.to_excel("inventors.xlsx")
 ```
-
----
-
-# 실습: 엑셀 데이터 읽어와서 처리하기
-
-`inventors.xlsx`을 불러와 `df`로 정의
 
 ---
 
