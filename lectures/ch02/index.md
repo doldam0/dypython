@@ -29,41 +29,10 @@ math: katex
 # 간단한 통계 수치
 
 - **평균**: 데이터의 총합을 데이터의 개수로 나눈 값
-  - $\bar X = \mathbb E[X] = \frac{1}{n} \sum_{i=1}^n X_i$
 - **중앙값**: 데이터를 크기 순서대로 정렬했을 때 가운데 위치한 값
 - **최빈값**: 데이터에서 가장 많이 나타나는 값
 - **표준편차**: 데이터가 평균으로부터 얼마나 떨어져 있는지를 나타내는 값
-  - $\sigma_X = \sqrt{\frac{1}{n} \sum_{i=1}^n (X_i - \bar X)^2}$
 - **분산**: 표준편차의 제곱
-  - $\sigma_X^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)^2$
-
----
-
-# 간단한 통계 수치
-
-<!-- _class: compact -->
-
-$$
-\begin{aligned}
-\sigma_X^2 &= \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)^2 \\
-&= \frac{1}{n} \sum_{i=1}^n (X_i^2 - 2X_i\bar X + \bar X^2) \\
-&= \frac{1}{n} \sum_{i=1}^n X_i^2 - \frac{2}{n} \sum_{i=1}^n X_i\bar X + \frac{1}{n} \sum_{i=1}^n \bar X^2 \\
-&= \frac{1}{n} \sum_{i=1}^n X_i^2 - 2 \bar X \frac{1}{n} \sum_{i=1}^n X_i + \bar X^2 \\
-\end{aligned}
-$$
-
----
-
-# 간단한 통계 수치
-
-$$
-\begin{aligned}
-\sigma_X^2 
-&= \frac{1}{n} \sum_{i=1}^n X_i^2 - {2} \bar X^2 + \bar X^2 \\
-&= \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar X^2 \\
-&= \mathbb E[X^2] - \mathbb E[X]^2 \\
-\end{aligned}
-$$
 
 ---
 
@@ -144,65 +113,6 @@ df["price"].describe()
 
 ---
 
-# 데이터 정규화
-
-- 데이터를 0과 1 사이의 값으로 변환하는 것
-- 데이터를 정규화하면 데이터의 분포를 비교하기 쉬움
-
-$$Z = \frac{X - X_{min}}{X_{max} - X_{min}}$$
-
----
-
-# 데이터 정규화
-
-* $0 \ge Z \ge 1$ 증명
-
-$X_{min} \le X \le X_{max}$이므로 $0 \le X - X_{min} \le X_{max} - X_{min}$
-$$\therefore 0 \le \frac{X - X_{min}}{X_{max} - X_{min}} \le 1$$
-
-
----
-
-# 데이터 정규화
-
-```python
-df["price"].apply(
-    lambda x: (x - df["price"].min()) / (df["price"].max() - df["price"].min())
-)
-df
-```
-
----
-
-# 데이터 정규화
-
-<!-- _class: table-code -->
-
-| name     | price | size |
-| -------- | ----- | ---- |
-| apple    | 0.0   | 10   |
-| banana   | 0.25  | 20   |
-| cherry   | 0.5   | 30   |
-| durian   | 0.75  | 40   |
-| eggplant | 1.0   | 45   |
-
----
-
-# 실습: size 컬럼을 정규화하기
-
----
-
-# 실습: size 컬럼을 정규화하기
-
-```python
-df["size"].apply(
-    lambda x: (x - df["size"].min()) / (df["size"].max() - df["size"].min())
-)
-df
-```
-
----
-
 # 복잡한 통계 수치
 
 - **사분위수**: 데이터를 크기 순서대로 정렬했을 때 1/4, 2/4, 3/4 위치에 있는 값
@@ -210,64 +120,12 @@ df
   - 25% 위치에 있는 값이 1사분위수
   - 50% 위치에 있는 값이 중앙값(2사분위수)
   - 75% 위치에 있는 값이 3사분위수
-- **공분산**: 두 변수가 얼마나 관련이 있는지를 나타내는 값
-  - $\sigma_{XY} = \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)(Y_i - \bar Y)$
-
----
-
-# 복잡한 통계 수치
-
-$$
-\begin{aligned}
-
-\sigma_{XY} &= \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)(Y_i - \bar Y) \\
-
-&= \frac{1}{n} \sum_{i=1}^n (X_iY_i - X_i\bar{Y} - \bar{X}Y_i + \bar{X}\bar{Y}) \\
-
-&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \frac{1}{n} \sum_{i=1}^n X_i\bar{Y} - \frac{1}{n} \sum_{i=1}^n \bar{X}Y_i + \frac{1}{n} \sum_{i=1}^n \bar{X}\bar{Y} \\
-
-\end{aligned}
-$$
-
----
-
-# 복잡한 통계 수치
-
-$$
-\begin{aligned}
-
-\sigma_{XY}
-&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \bar{Y}\frac{1}{n} \sum_{i=1}^n X_i - \bar{X}\frac{1}{n} \sum_{i=1}^n Y_i + \bar{X}\bar{Y} \\
-
-
-&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \bar{Y}\bar{X} - \bar{X}\bar{Y} + \bar{X}\bar{Y} \\
-
-&= \frac{1}{n} \sum_{i=1}^n X_iY_i - \bar{X}\bar{Y} \\
-
-&= \mathbb E[XY] - \mathbb E[X]\mathbb E[Y] \\
-
-\end{aligned}
-$$
-
----
-
-# 복잡한 통계 수치
-
-* 공분산의 통계적 의미
-
-  $$\sigma_{XY} = \frac{1}{n} \sum_{i=1}^n (X_i - \bar X)(Y_i - \bar Y)$$
-
-  - $X_i$가 평균보다 클 때 $Y_i$도 평균보다 크면 $\sigma_{XY}$의 값 증가 (양의 상관관계)
-  - $X_i$가 평균보다 클 때 $Y_i$가 평균보다 작거나, $X_i$가 평균보다 작을 때 $Y_i$가 평균보다 크면 $\sigma_{XY}$의 값 감소 (음의 상관관계)
-  - $X_i$와 $Y_i$ 값에 규칙성이 없으면 $\sigma_{XY}$은 값이 0에 가까워짐 (상관관계 없음)
 
 ---
 
 # 복잡한 통계 수치
 
 - **상관계수**: 두 변수가 얼마나 관련이 있는지를 나타내는 값
-  - $r_{XY} = \frac{\sigma_{XY}}{\sigma_X \sigma_Y}$
-  - 공분산의 크기를 $-1$과 $1$ 사이의 값으로 정규화한 값
   - $-1 \le r_{XY} \le 1$
   - $r_{XY} = 1$이면 완전한 양의 상관관계
   - $r_{XY} = -1$이면 완전한 음의 상관관계
@@ -278,7 +136,6 @@ $$
 # 복잡한 통계 수치
 
 - `quantile(q)`: q-분위수
-- `cov()`: 공분산
 - `corr()`: 상관계수
 
 ---
@@ -289,113 +146,7 @@ $$
 df["price"].quantile(0.25)    # 2000.0
 df["price"].quantile(0.5)     # 3000.0
 df["price"].quantile(0.75)    # 4000.0
-df["price"].cov(df["size"])   # 12500.0
 df["price"].corr(df["size"])  # 0.9970544855015815
-```
-
----
-
-# 데이터 표준화
-
-- 데이터를 평균이 0이고 표준편차가 1인 데이터로 변환하는 것
-- 데이터를 표준화하면 데이터의 분포를 비교하기 쉬움
-
-$$Z = \frac{X - \bar X}{\sigma_X}$$
-
----
-
-# 데이터 표준화
-
-```python
-m = df["price"].mean()        # 3000
-sigma = df["price"].std()     # 1581.1388300841897
-df["price"].apply(lambda x: (x - m) / sigma)
-df
-```
-
----
-
-# 데이터 표준화
-
-$$
-\begin{aligned}
-\bar{Z} = \mathbb E[Z] &= \mathbb E\left[\frac{X - \bar X}{\sigma_X}\right] \\
-&= \frac{1}{\sigma_X} \mathbb E[X - \bar X] \\
-&= \frac{1}{\sigma_X} \mathbb E[X] - \frac{1}{\sigma_X} \mathbb E[\bar X] \\
-&= 0 \quad (\because \mathbb E[\bar{X}] = \mathbb E[X]) \\
-\end{aligned}
-$$
-
----
-
-# 데이터 표준화
-
-$$
-\begin{aligned}
-\mathbb E[Z^2]
-&= \mathbb E\left[\left(\frac{X - \bar X}{\sigma_X}\right)^2\right] \\
-&= \frac{1}{\sigma_X^2} \mathbb E[(X - \bar X)^2] \\
-&= \frac{1}{\sigma_X^2} \mathbb E[X^2 - 2X\bar X + \bar X^2] \\
-&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X\bar X] + \frac{1}{\sigma_X^2} \mathbb E[\bar X^2] \\
-\end{aligned}
-$$
-
----
-
-# 데이터 표준화
-
-$$
-\begin{aligned}
-\mathbb E[Z^2]
-&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X]\mathbb E[\bar X] + \frac{1}{\sigma_X^2} \mathbb E[\bar X^2] \\
-&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X]^2 + \frac{1}{\sigma_X^2} \mathbb E[\bar X^2] \\
-&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{2}{\sigma_X^2} \mathbb E[X]^2 + \frac{1}{\sigma_X^2} \mathbb E[X]^2 \\
-&= \frac{1}{\sigma_X^2} \mathbb E[X^2] - \frac{1}{\sigma_X^2} \mathbb E[X]^2 \\
-\end{aligned}
-$$
-
----
-
-# 데이터 표준화
-
-$$
-\begin{aligned}
-\mathbb E[Z^2]
-&= \frac{1}{\sigma_X^2} (\mathbb E[X^2] - \mathbb E[X]^2) \\
-&= \frac{1}{\sigma_X^2} \sigma_X^2 \\
-&= 1 \\
-\end{aligned}
-$$
-
-$$\therefore \sigma_Z = \sqrt{\mathbb E[Z^2] - \mathbb E[Z]^2} = \sqrt{1 - 0} = 1$$
-
----
-
-# 데이터 표준화
-
-<!-- _class: table-code -->
-
-| name     | price      | size |
-| -------- | ---------- | ---- |
-| apple    | -1.2649111 | 10   |
-| banana   | -0.6324555 | 20   |
-| cherry   | 0.0        | 30   |
-| durian   | 0.6324555  | 40   |
-| eggplant | 1.2649111  | 45   |
-
----
-
-# 실습: size 컬럼을 표준화하기
-
----
-
-# 실습: size 컬럼을 표준화하기
-
-```python
-m = df["size"].mean()        # 29.0
-sigma = df["size"].std()     # 13.228756555322953
-df["size"].apply(lambda x: (x - m) / sigma)
-df
 ```
 
 ---
@@ -583,3 +334,25 @@ pd.crosstab(df["category"], df["favorite"])
 | vegetable | 1   | 0   | 1   |
 
 - 위 결과에서 얻을 수 있는 정보는?
+
+---
+
+# 실습: 타이타닉 데이터 분석
+
+- 데이터셋 다운로드
+  https://www.kaggle.com/competitions/titanic/data?select=train.csv
+  에서 `train.csv` 파일 다운로드하기
+
+---
+
+# 실습: 타이타닉 데이터 분석
+
+- `train.csv` 파일 불러오기
+
+- `NaN` 값이 있는 행 제거하기
+
+- `Pclass` 열의 값이 1, 2, 3인 값끼리 묶어서 `class1`, `class2`, `class3`을 새로 생성하기
+
+- `class1`, `class2`, `class3`의 `Age` 속성값의 평균을 계산해보기
+
+- 숫자 데이터로 이루어진 열들(`Survived`, `Pclass`, `Age`, `SibSp`, `Parch`, `Fare`)만 남긴 후, 상관계수 를 구하여 각각의 연관관계 도출해보기
