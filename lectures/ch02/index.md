@@ -242,6 +242,101 @@ df.groupby("category").agg({
 
 ---
 
+# 데이터프레임 병합
+
+- **병합(merge)**: 두 개 이상의 데이터프레임을 하나로 합치는 것
+
+```python
+df1 = pd.DataFrame({
+    "name": ["apple", "banana", "carrot", "durian", "eggplant"],
+    "price": [1000, 2000, 3000, 4000, 5000]
+})
+df2 = pd.DataFrame({
+    "name": ["apple", "banana", "carrot", "durian", "fig"],
+    "color": ["red", "yellow", "orange", "green", "purple"]
+})
+```
+
+---
+
+# 데이터프레임 병합
+
+<!-- _class: table-code two-cols -->
+
+| name   | price | color  |
+| ------ | ----- | ------ |
+| apple  | 1000  | red    |
+| banana | 2000  | yellow |
+| carrot | 3000  | orange |
+| durian | 4000  | green  |
+
+```python
+pd.merge(df1, df2)
+```
+
+---
+
+# 데이터프레임 병합
+
+<!-- _class: table-code two-cols -->
+
+| name     | price | color  |
+| -------- | ----- | ------ |
+| apple    | 1000  | red    |
+| banana   | 2000  | yellow |
+| carrot   | 3000  | orange |
+| durian   | 4000  | green  |
+| eggplant | 5000  | NaN    |
+| fig      | NaN   | purple |
+
+```python
+pd.merge(df1, df2, how="outer")
+```
+
+---
+
+# 데이터프레임 병합
+
+<!-- _class: table-code two-cols -->
+
+| name     | price | color  |
+| -------- | ----- | ------ |
+| apple    | 1000  | red    |
+| banana   | 2000  | yellow |
+| carrot   | 3000  | orange |
+| durian   | 4000  | green  |
+| eggplant | 5000  | NaN    |
+
+```python
+pd.merge(df1, df2, how="left")
+```
+
+---
+
+# 데이터프레임 병합
+
+<!-- _class: table-code two-cols -->
+
+| name   | price | color  |
+| ------ | ----- | ------ |
+| apple  | 1000  | red    |
+| banana | 2000  | yellow |
+| carrot | 3000  | orange |
+| durian | 4000  | green  |
+| fig    | NaN   | purple |
+
+```python
+pd.merge(df1, df2, how="right")
+```
+
+---
+
+# 데이터프레임 병합
+
+![height:900px](figs/joins.webp)
+
+---
+
 # 피벗 테이블
 
 - 데이터를 특정 기준에 따라 여러 그룹으로 나누는 것
