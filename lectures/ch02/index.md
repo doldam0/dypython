@@ -349,10 +349,34 @@ pd.crosstab(df["category"], df["favorite"])
 
 - `train.csv` 파일 불러오기
 
+  - ```python
+    df = pd.read_csv("train.csv")
+    ```
+
+![height:600px](figs/1.png)
+
+---
+
+# 실습: 타이타닉 데이터 분석
+
 - `NaN` 값이 있는 행 제거하기
 
-- `Pclass` 열의 값이 1, 2, 3인 값끼리 묶어서 `class1`, `class2`, `class3`을 새로 생성하기
+- `Pclass` 열로 그룹화한 뒤 각각의 `Age` 속성값의 평균을 계산해보기
 
-- `class1`, `class2`, `class3`의 `Age` 속성값의 평균을 계산해보기
+![height:600px](figs/2.png)
 
-- 숫자 데이터로 이루어진 열들(`Survived`, `Pclass`, `Age`, `SibSp`, `Parch`, `Fare`)만 남긴 후, 상관계수 를 구하여 각각의 연관관계 도출해보기
+---
+
+# 실습: 타이타닉 데이터 분석
+
+- `Survived`에 대한 `Pclass`, `Age`, `SibSp` 열의 상관계수를 구하여 연관관계 도출해보기
+
+---
+
+# 실습: 타이타닉 데이터 분석
+
+- 숫자 데이터로 이루어진 열들(`Survived`, `Pclass`, `Age`, `SibSp`, `Parch`, `Fare`)만 남긴 후, `Survived`에 대한 각 열의 상관계수를 구하여 연관관계 도출해보기
+
+  - 참고: `df.corr()` 함수 사용!
+
+![](figs/3.png)
