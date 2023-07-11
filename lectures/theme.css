@@ -384,21 +384,26 @@ section.title h2 {
   font-weight: lighter;
 }
 
-section.table-code.two-cols pre {
+section.two-cols pre {
   float: left;
   width: 50%;
   margin-bottom: 1em;
 }
 
-section.table-code.two-cols table {
+section.two-cols table {
   float: left;
   margin-right: 1em;
   margin-bottom: 1em;
 }
 
-section.table-code.two-cols p,
-section.table-code.two-cols ul,
-section.table-code.two-cols ol {
+section.two-cols img {
+  float: left;
+  margin-right: 1em;
+}
+
+section.two-cols p,
+section.two-cols ul,
+section.two-cols ol {
   clear: both;
 }
 
