@@ -20,6 +20,15 @@ def main(args: MainArguments):
     import pandas as pd
 
     def get_group_name(group: int) -> str:
+        group_mapping = {
+            1: 1,
+            2: 5,
+            3: 4,
+            4: 6,
+            5: 2,
+            6: 3,
+        }
+        group = group_mapping[group]
         if group == 1:
             return ""
         else:
@@ -43,7 +52,7 @@ def main(args: MainArguments):
             "logical": df[f"논리 전개{get_group_name(group)}"].mean(),
             "presentation": df[f"발표{get_group_name(group)}"].mean(),
         }
-        for group in range(1, 8)
+        for group in range(1, 7)
     }
 
     print(scores)
